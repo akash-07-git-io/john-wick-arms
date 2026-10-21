@@ -7,6 +7,13 @@
 [![Render](https://img.shields.io/badge/Render-Docker_Service-46E3B7?style=for-the-badge&logo=render&logoColor=black)](https://render.com/)
 [![License](https://img.shields.io/badge/License-Academic_MIT-d4af37?style=for-the-badge)](#-license)
 
+
+> [!TIP]
+> ### 🌐 Live Production Deployment
+> - **Main Application**: **[https://john-wick-arms.onrender.com/](https://john-wick-arms.onrender.com/)**
+> - **Admin Command Desk**: **[https://john-wick-arms.onrender.com/admin_preview/dashboard.html](https://john-wick-arms.onrender.com/admin_preview/dashboard.html)**
+> - **GitHub Repository**: **[https://github.com/akash-07-git-io/john-wick-arms](https://github.com/akash-07-git-io/john-wick-arms)**
+
 > *"Tactical precision. Crimson steel. Excommunicado protection."*  
 > Inspired by the high-precision cinematic world of the Continental and High Table Armory, **John Wick & Co. Arms** is an end-to-end, enterprise-grade Weapon Management & Requisition System developed for **Web Programming (Assignment II)**.
 
