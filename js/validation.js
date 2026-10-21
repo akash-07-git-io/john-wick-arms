@@ -1,103 +1,110 @@
-// Registration Validation
+// ============================================================
+// Input Validation & Client Security Form Handlers
+// ============================================================
+
+// Registration Validation with Weapon Clearance Details
 function handleRegister(e) {
   e.preventDefault();
   let valid = true;
   
-  const name = document.getElementById('reg-name').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const pass = document.getElementById('reg-password').value.trim();
+  const nameInput = document.getElementById('reg-name');
+  const emailInput = document.getElementById('reg-email');
+  const passInput = document.getElementById('reg-pass') || document.getElementById('reg-password');
+  const tierInput = document.getElementById('reg-tier');
+  const markerInput = document.getElementById('reg-marker');
+  const dutyInput = document.getElementById('reg-duty');
+  const phoneInput = document.getElementById('reg-phone');
+  const addressInput = document.getElementById('reg-address');
 
-  document.getElementById('err-reg-name').textContent = '';
-  document.getElementById('err-reg-email').textContent = '';
-  document.getElementById('err-reg-password').textContent = '';
+  const name = nameInput ? nameInput.value.trim() : '';
+  const email = emailInput ? emailInput.value.trim() : '';
+  const pass = passInput ? passInput.value.trim() : '';
+  const tier = tierInput ? tierInput.value : 'Tier 2 — Sovereign Continental Diplomat';
+  const marker = markerInput ? markerInput.value.trim() : 'BOM-7741-JW';
+  const duty = dutyInput ? dutyInput.value : 'New York Continental';
+  const phone = phoneInput ? phoneInput.value.trim() : '';
+  const address = addressInput ? addressInput.value.trim() : '';
+
+  // Clear previous errors
+  const errName = document.getElementById('err-reg-name');
+  const errEmail = document.getElementById('err-reg-email');
+  const errPass = document.getElementById('err-reg-pass') || document.getElementById('err-reg-password');
+
+  if (errName) errName.textContent = '';
+  if (errEmail) errEmail.textContent = '';
+  if (errPass) errPass.textContent = '';
 
   if (!name) {
-    document.getElementById('err-reg-name').textContent = 'Operative name required.';
+    if (errName) errName.textContent = 'Operative full name & alias required.';
     valid = false;
   }
   if (!email || !/\S+@\S+\.\S+/.test(email)) {
-    document.getElementById('err-reg-email').textContent = 'Valid email address required.';
+    if (errEmail) errEmail.textContent = 'Valid Continental email required.';
     valid = false;
   }
   if (!pass || pass.length < 6) {
-    document.getElementById('err-reg-password').textContent = 'Password must be at least 6 characters.';
+    if (errPass) errPass.textContent = 'Password must be at least 6 characters.';
     valid = false;
   }
 
   if (valid) {
-    currentUser = { name, email, registeredEvents: registeredEvents };
+    currentUser = {
+      name: name,
+      email: email,
+      tier: tier,
+      marker: marker,
+      duty: duty,
+      phone: phone,
+      address: address,
+      registeredEvents: registeredEvents
+    };
     updateUserUI();
+    alert(`High Table Weapon Clearance Approved!\nWelcome, Operative ${name} (${tier}).`);
     navigateTo('profile');
   }
 }
 
-// Login Validation
+// Operative Login Validation
 function handleLogin(e) {
   e.preventDefault();
   let valid = true;
 
-  const email = document.getElementById('login-email').value.trim();
-  const pass = document.getElementById('login-password').value.trim();
+  const emailInput = document.getElementById('login-email');
+  const passInput  = document.getElementById('login-pass') || document.getElementById('login-password');
 
-  document.getElementById('err-login-email').textContent = '';
-  document.getElementById('err-login-password').textContent = '';
+  const email = emailInput ? emailInput.value.trim() : '';
+  const pass  = passInput ? passInput.value.trim() : '';
+
+  const errEmail = document.getElementById('err-login-email');
+  const errPass  = document.getElementById('err-login-pass') || document.getElementById('err-login-password');
+
+  if (errEmail) errEmail.textContent = '';
+  if (errPass) errPass.textContent = '';
 
   if (!email || !/\S+@\S+\.\S+/.test(email)) {
-    document.getElementById('err-login-email').textContent = 'Enter a valid email.';
+    if (errEmail) errEmail.textContent = 'Enter a valid secure email.';
     valid = false;
   }
   if (!pass) {
-    document.getElementById('err-login-password').textContent = 'Password required.';
+    if (errPass) errPass.textContent = 'Security clearance password required.';
     valid = false;
   }
 
   if (valid) {
-    currentUser = { name: email.split('@')[0], email, registeredEvents: registeredEvents };
+    const isWick = email.toLowerCase().includes('wick');
+    currentUser = {
+      name: isWick ? 'John Wick (Baba Yaga)' : (email.split('@')[0].toUpperCase()),
+      email: email,
+      tier: isWick ? 'Tier 3 — High Table Inner Circle' : 'Tier 2 — Sovereign Continental Diplomat',
+      marker: isWick ? 'BOM-0001-WICK' : 'BOM-8832-OP',
+      registeredEvents: registeredEvents
+    };
     updateUserUI();
     navigateTo('profile');
   }
 }
 
-// Credit Card Payment Validation
+// Card Form Handler
 function handlePayment(e) {
-  e.preventDefault();
-  
-  if (cart.length === 0) {
-    alert("Your Requisition Cart is empty! Add items from the Armory Catalog first.");
-    return;
-  }
-
-  let valid = true;
-  const cardName = document.getElementById('card-name').value.trim();
-  const cardNumber = document.getElementById('card-number').value.replace(/\s+/g, '');
-  const cardExp = document.getElementById('card-exp').value.trim();
-  const cardCvv = document.getElementById('card-cvv').value.trim();
-
-  document.getElementById('err-card-name').textContent = '';
-  document.getElementById('err-card-number').textContent = '';
-  document.getElementById('err-card-exp').textContent = '';
-  document.getElementById('err-card-cvv').textContent = '';
-
-  if (!cardName) {
-    document.getElementById('err-card-name').textContent = 'Cardholder name required.';
-    valid = false;
-  }
-  if (!/^\d{16}$/.test(cardNumber)) {
-    document.getElementById('err-card-number').textContent = 'Enter a valid 16-digit credit card number.';
-    valid = false;
-  }
-  if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(cardExp)) {
-    document.getElementById('err-card-exp').textContent = 'Expiry must match MM/YY format.';
-    valid = false;
-  }
-  if (!/^\d{3,4}$/.test(cardCvv)) {
-    document.getElementById('err-card-cvv').textContent = 'Valid 3 or 4 digit CVV required.';
-    valid = false;
-  }
-
-  if (valid) {
-    cart = [];
-    updateCartUI();
-    navigateTo('success');
-  }
+  handlePaymentSubmit(e, 'High Table Encrypted Card');
 }

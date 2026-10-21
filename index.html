@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JOHN WICK & CO. ARMS | High Table Armory</title>
+  <title>JOHN WICK &amp; CO. ARMS | High Table Armory</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
   <!-- Navigation Bar -->
   <header class="navbar">
     <div class="nav-container">
-      <div class="brand-logo" onclick="navigateTo('home')">JOHN WICK <span>& CO. ARMS</span></div>
+      <div class="brand-logo" onclick="navigateTo('home')" style="cursor:pointer;">JOHN WICK <span>&amp; CO. ARMS</span></div>
       <nav class="nav-links">
         <a class="nav-item active" data-page="home" onclick="navigateTo('home')">Home</a>
         <a class="nav-item" data-page="catalog" onclick="navigateTo('catalog')">Armory Catalog</a>
@@ -26,7 +26,7 @@
         <a class="nav-item" data-page="register" id="nav-register" onclick="navigateTo('register')">Register</a>
         <a class="nav-item" data-page="login" id="nav-login" onclick="navigateTo('login')">Login</a>
         <a class="nav-item" data-page="profile" id="nav-profile" onclick="navigateTo('profile')" style="display:none;">Profile</a>
-        <a class="nav-item" data-page="payment" onclick="navigateTo('payment')">Credit Payment (<span id="cart-count">0</span>)</a>
+        <a class="nav-item" data-page="payment" onclick="navigateTo('payment')">Requisition Cart (<span id="cart-count">0</span>)</a>
       </nav>
     </div>
   </header>
@@ -53,23 +53,108 @@
       <div class="hero-banner catalog-hero">
         <span class="badge">Tactical Inventory</span>
         <h1 class="hero-title">ARMORY CATALOG</h1>
-        <p class="hero-subtitle">Match-grade sidearms, tactical shotguns & sniper platforms.</p>
+        <p class="hero-subtitle">Match-grade sidearms, tactical shotguns &amp; sniper platforms.</p>
       </div>
 
       <div class="catalog-container">
         <div class="filter-bar">
-          <button class="filter-btn active" onclick="filterCatalog('all')">All Items</button>
-          <button class="filter-btn" onclick="filterCatalog('Sidearms')">Sidearms</button>
-          <button class="filter-btn" onclick="filterCatalog('Shotguns')">Shotguns</button>
-          <button class="filter-btn" onclick="filterCatalog('Submachine Guns')">Submachine Guns</button>
-          <button class="filter-btn" onclick="filterCatalog('Rifles')">Rifles</button>
+          <button class="filter-btn active" id="filter-all" onclick="filterCatalog('all')">All Items</button>
+          <button class="filter-btn" id="filter-sidearms" onclick="filterCatalog('Sidearms')">Sidearms</button>
+          <button class="filter-btn" id="filter-shotguns" onclick="filterCatalog('Shotguns')">Shotguns</button>
+          <button class="filter-btn" id="filter-smg" onclick="filterCatalog('Submachine Guns')">Submachine Guns</button>
+          <button class="filter-btn" id="filter-rifles" onclick="filterCatalog('Rifles')">Rifles</button>
         </div>
 
         <div class="product-grid" id="full-catalog-grid"></div>
       </div>
     </section>
 
-    <!-- 3. HIGH TABLE EVENTS PAGE VIEW (6 EVENTS) -->
+    <!-- 3. WEAPON SPECIFICATION & DETAIL VIEW (DEDICATED PAGE) -->
+    <section id="page-weapon-detail" class="page-section">
+      <div class="hero-banner catalog-hero">
+        <span class="badge" id="detail-category-badge">TACTICAL SPECIFICATION</span>
+        <h1 class="hero-title" id="detail-title">WEAPON SPECIFICATIONS</h1>
+        <p class="hero-subtitle" id="detail-subtitle">Continental Sommelier In-Depth Ballistic Evaluation</p>
+      </div>
+
+      <div class="catalog-container">
+        <div class="weapon-detail-container">
+          <!-- Weapon Visual Box -->
+          <div class="weapon-detail-img-box">
+            <img id="detail-img" src="" alt="Weapon View">
+          </div>
+
+          <!-- Specs & Procurement -->
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="product-tag" id="detail-tag">Sidearms</span>
+              <span style="color:var(--success-green); font-weight:600; font-size:0.85rem;" id="detail-status">&#10003; High Table Allocation Available</span>
+            </div>
+            
+            <h2 id="detail-name" style="color:var(--accent-gold); margin:0.8rem 0 0.4rem; font-size:1.8rem;">Weapon Name</h2>
+            <div class="product-price" id="detail-price" style="font-size:1.6rem; margin-bottom:1rem;">$0.00</div>
+            
+            <p id="detail-desc" style="color:var(--text-muted); line-height:1.6; margin-bottom:1.5rem;">
+              Weapon description and ballistics profile.
+            </p>
+
+            <!-- Technical Specifications Grid -->
+            <h3 style="font-size:1rem; color:var(--text-main); text-transform:uppercase; letter-spacing:1px; margin-bottom:0.5rem;">Technical Specifications</h3>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Caliber</span>
+                <span class="spec-val" id="spec-caliber">--</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Magazine Capacity</span>
+                <span class="spec-val" id="spec-capacity">--</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Barrel Length</span>
+                <span class="spec-val" id="spec-barrel">--</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Effective Range</span>
+                <span class="spec-val" id="spec-range">--</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Operating Action</span>
+                <span class="spec-val" id="spec-action">--</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Target Optics</span>
+                <span class="spec-val" id="spec-sights">--</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Finish / Coating</span>
+                <span class="spec-val" id="spec-finish">--</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Weapon Weight</span>
+                <span class="spec-val" id="spec-weight">--</span>
+              </div>
+            </div>
+
+            <!-- Procurement Form -->
+            <div style="display:flex; gap:1rem; align-items:center; margin-top:1.5rem;">
+              <div style="flex:1;">
+                <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:0.3rem;">Allocation Quantity</label>
+                <input type="number" id="detail-qty" value="1" min="1" max="10" style="width:100%; padding:0.75rem; background:var(--bg-dark); border:1px solid var(--gunmetal-border); color:var(--text-main); border-radius:var(--radius); text-align:center;">
+              </div>
+              <div style="flex:2; margin-top:1.2rem;">
+                <button class="btn-primary" id="btn-detail-add" onclick="addCurrentWeaponToCart()">Add to Requisition Cart</button>
+              </div>
+            </div>
+
+            <div style="margin-top:1.2rem;">
+              <button class="btn-secondary" style="width:auto; padding:0.5rem 1.2rem;" onclick="navigateTo('catalog')">&larr; Return to Armory Catalog</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. HIGH TABLE EVENTS PAGE VIEW (6 EVENTS) -->
     <section id="page-events" class="page-section">
       <div class="hero-banner events-hero">
         <span class="badge">Exclusive Allocations</span>
@@ -82,42 +167,96 @@
       </div>
     </section>
 
-    <!-- 4. REGISTER PAGE VIEW -->
+    <!-- 5. REGISTER PAGE VIEW (ENHANCED WEAPON CLEARANCE REGISTRATION) -->
     <section id="page-register" class="page-section">
       <div class="hero-banner register-hero">
         <span class="badge">Continental Credentialing</span>
         <h1 class="hero-title">OPERATIVE REGISTRATION</h1>
       </div>
 
-      <div class="form-container">
-        <h2 class="section-title">New Credentials</h2>
-        <p class="section-subtitle">Create your High Table clearance profile.</p>
+      <div class="form-container" style="max-width:680px;">
+        <h2 class="section-title">New Credentials &amp; Weapon Clearance</h2>
+        <p class="section-subtitle">Complete your high-table biometric and tactical clearance profile.</p>
         
         <form id="register-form" onsubmit="handleRegister(event)" novalidate>
-          <div class="form-group">
-            <label for="reg-name">Full Operative Name *</label>
-            <input type="text" id="reg-name" placeholder="John Wick">
-            <span class="error-msg" id="err-reg-name"></span>
+          <div class="row-2">
+            <div class="form-group">
+              <label for="reg-name">Full Operative Legal / Alias Name *</label>
+              <input type="text" id="reg-name" placeholder="John Wick (Baba Yaga)" required>
+              <span class="error-msg" id="err-reg-name"></span>
+            </div>
+            <div class="form-group">
+              <label for="reg-email">Secure Continental Email *</label>
+              <input type="email" id="reg-email" placeholder="wick@continental.com" required>
+              <span class="error-msg" id="err-reg-email"></span>
+            </div>
+          </div>
+
+          <div class="row-2">
+            <div class="form-group">
+              <label for="reg-tier">High Table Clearance Tier *</label>
+              <select id="reg-tier" style="width:100%; padding:0.8rem; background:var(--bg-dark); border:1px solid var(--gunmetal-border); color:var(--text-main); border-radius:var(--radius);">
+                <option value="Tier 1 - Standard Operative">Tier 1 &mdash; Standard Operative</option>
+                <option value="Tier 2 - Sovereign Diplomat" selected>Tier 2 &mdash; Sovereign Continental Diplomat</option>
+                <option value="Tier 3 - High Table Inner Circle">Tier 3 &mdash; High Table Inner Circle</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reg-marker">Blood Oath Marker / Operative Code *</label>
+              <input type="text" id="reg-marker" placeholder="BOM-9021-WICK" value="BOM-7741-JW">
+            </div>
+          </div>
+
+          <div class="row-2">
+            <div class="form-group">
+              <label for="reg-duty">Assigned Base Continental Safehouse *</label>
+              <select id="reg-duty" style="width:100%; padding:0.8rem; background:var(--bg-dark); border:1px solid var(--gunmetal-border); color:var(--text-main); border-radius:var(--radius);">
+                <option value="New York Continental">New York Continental (Manager Winston)</option>
+                <option value="Rome Continental">Rome Continental (Manager Julius)</option>
+                <option value="Osaka Continental">Osaka Continental (Manager Shimazu)</option>
+                <option value="Casablanca Continental">Casablanca Continental (Manager Sofia)</option>
+                <option value="Berlin Underground">Berlin Underground Safehouse</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reg-phone">Encrypted Comms Phone Number *</label>
+              <input type="text" id="reg-phone" placeholder="+1-555-0199" value="+1-555-0144">
+            </div>
           </div>
 
           <div class="form-group">
-            <label for="reg-email">Secure Email Address *</label>
-            <input type="email" id="reg-email" placeholder="wick@continental.com">
-            <span class="error-msg" id="err-reg-email"></span>
+            <label for="reg-license">Armament Procurement Clearance Key *</label>
+            <input type="text" id="reg-license" placeholder="HTC-LIC-98441-SEC" value="HTC-LIC-88421-ARMS">
           </div>
 
           <div class="form-group">
-            <label for="reg-password">Security Password *</label>
-            <input type="password" id="reg-password" placeholder="At least 6 characters">
-            <span class="error-msg" id="err-reg-password"></span>
+            <label for="reg-address">Secure Delivery Safehouse Coordinates / Street Address *</label>
+            <input type="text" id="reg-address" placeholder="1 Wall Street Court, Continental Hotel NYC" value="1 Wall Street Court, Continental Safehouse Suite 812">
           </div>
 
-          <button type="submit" class="btn-primary">Register Account</button>
+          <div class="form-group">
+            <label for="reg-pass">Security Clearance Password * (min 6 characters)</label>
+            <input type="password" id="reg-pass" placeholder="••••••••••••" required>
+            <span class="error-msg" id="err-reg-pass"></span>
+          </div>
+
+          <div class="form-group" style="display:flex; align-items:center; gap:0.6rem; margin:1rem 0;">
+            <input type="checkbox" id="reg-rules" checked required style="accent-color:var(--accent-gold); width:18px; height:18px;">
+            <label for="reg-rules" style="font-size:0.85rem; color:var(--text-muted);">
+              I swear allegiance to Continental rules. No business shall be conducted on Continental grounds.
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary">Register Continental Clearance</button>
         </form>
+
+        <p style="text-align:center; margin-top:1.2rem; color:var(--text-muted);">
+          Already authenticated? <a href="javascript:void(0)" onclick="navigateTo('login')" style="color:var(--accent-gold);">Access Operative Login</a>
+        </p>
       </div>
     </section>
 
-    <!-- 5. LOGIN PAGE VIEW -->
+    <!-- 6. LOGIN PAGE VIEW (WITH 1-CLICK TEST OPERATIVE BUTTONS) -->
     <section id="page-login" class="page-section">
       <div class="hero-banner login-hero">
         <span class="badge">Clearance Check</span>
@@ -125,6 +264,22 @@
       </div>
 
       <div class="form-container">
+        <!-- Quick Test User Credentials Box -->
+        <div class="test-user-box">
+          <h4>&#9873; DEMO TEST CREDENTIALS (1-CLICK FILL)</h4>
+          <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.4;">
+            Click below to instantly auto-fill credentials for quick academic demonstration:
+          </p>
+          <div class="test-btn-group">
+            <button type="button" class="btn-test" onclick="fillTestUser('wick')">
+              &#128100; Test Operative (John Wick)
+            </button>
+            <button type="button" class="btn-test" onclick="fillTestUser('admin')">
+              &#128737; Armory Admin (Continental)
+            </button>
+          </div>
+        </div>
+
         <h2 class="section-title">Operative Login</h2>
         <p class="section-subtitle">Authenticate your Continental session.</p>
 
@@ -136,17 +291,21 @@
           </div>
 
           <div class="form-group">
-            <label for="login-password">Password *</label>
-            <input type="password" id="login-password" placeholder="••••••••">
-            <span class="error-msg" id="err-login-password"></span>
+            <label for="login-pass">Password *</label>
+            <input type="password" id="login-pass" placeholder="••••••••••••">
+            <span class="error-msg" id="err-login-pass"></span>
           </div>
 
           <button type="submit" class="btn-primary">Authenticate Operative</button>
         </form>
+
+        <p style="text-align:center; margin-top:1.2rem; color:var(--text-muted);">
+          Need High Table clearance? <a href="javascript:void(0)" onclick="navigateTo('register')" style="color:var(--accent-gold);">Register Operative Profile</a>
+        </p>
       </div>
     </section>
 
-    <!-- 6. USER PROFILE PAGE VIEW -->
+    <!-- 7. USER PROFILE PAGE VIEW -->
     <section id="page-profile" class="page-section">
       <div class="hero-banner profile-hero">
         <span class="badge">Status: Active</span>
@@ -155,12 +314,12 @@
 
       <div class="form-container" style="max-width:650px;">
         <h2 class="section-title">Continental Profile</h2>
-        <p class="section-subtitle">Authenticated Clearance Level & Reserved Events</p>
+        <p class="section-subtitle">Authenticated Clearance Level &amp; Reserved Events</p>
 
         <div class="profile-card">
           <div class="profile-row">
             <span class="profile-label">Operative Clearance:</span>
-            <span class="profile-val" style="color: var(--success-green);">High Table Approved</span>
+            <span class="profile-val" style="color: var(--success-green);">&#10003; High Table Approved</span>
           </div>
           <div class="profile-row">
             <span class="profile-label">Operative Name:</span>
@@ -171,12 +330,20 @@
             <span class="profile-val" id="profile-display-email">--</span>
           </div>
           <div class="profile-row">
+            <span class="profile-label">Clearance Tier:</span>
+            <span class="profile-val" id="profile-display-tier">Tier 2 &mdash; Sovereign Continental Diplomat</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Blood Oath Marker:</span>
+            <span class="profile-val" id="profile-display-marker" style="color:var(--accent-gold);">BOM-7741-JW</span>
+          </div>
+          <div class="profile-row">
             <span class="profile-label">Registered Events:</span>
             <span class="profile-val" id="profile-display-events">None</span>
           </div>
           <div class="profile-row">
             <span class="profile-label">Ledger Balance:</span>
-            <span class="profile-val">🪙 250 Gold Coins</span>
+            <span class="profile-val" style="color:var(--accent-gold); font-weight:bold;">&#129689; 250 Continental Gold Coins</span>
           </div>
         </div>
 
@@ -184,11 +351,11 @@
       </div>
     </section>
 
-    <!-- 7. CREDIT CARD PAYMENT & CART PAGE VIEW -->
+    <!-- 8. REQUISITION & MULTIPLE PROFESSIONAL PAYMENT OPTIONS PAGE VIEW -->
     <section id="page-payment" class="page-section">
       <div class="hero-banner payment-hero">
         <span class="badge">Encrypted Checkout</span>
-        <h1 class="hero-title">REQUISITION & PAYMENT</h1>
+        <h1 class="hero-title">REQUISITION &amp; PAYMENT</h1>
       </div>
 
       <div class="payment-layout-container">
@@ -202,39 +369,151 @@
           </div>
         </div>
 
-        <!-- Payment Form -->
+        <!-- Professional Multiple Payment Methods Form -->
         <div class="form-container" style="margin: 0; max-width: 100%;">
-          <h2 class="section-title">Credit Card Payment</h2>
-          <p class="section-subtitle">Encrypted transaction for High Table requisitions.</p>
+          <div class="payment-methods-header">
+            <h2 class="section-title">Select Settlement Method</h2>
+            <p class="section-subtitle">Multi-channel High Table transactional escrow.</p>
+          </div>
 
-          <form id="payment-form" onsubmit="handlePayment(event)" novalidate>
-            <div class="form-group">
-              <label for="card-name">Cardholder Full Name *</label>
-              <input type="text" id="card-name" placeholder="John Wick">
-              <span class="error-msg" id="err-card-name"></span>
+          <!-- Payment Tabs -->
+          <div class="payment-tabs">
+            <div class="payment-tab-btn active" id="tab-gold" onclick="switchPaymentMethod('gold')">
+              <span class="tab-icon">&#129689;</span>
+              <span>Continental Gold Coins</span>
             </div>
-
-            <div class="form-group">
-              <label for="card-number">Credit Card Number *</label>
-              <input type="text" id="card-number" placeholder="4532 1122 3344 5566" maxlength="19">
-              <span class="error-msg" id="err-card-number"></span>
+            <div class="payment-tab-btn" id="tab-card" onclick="switchPaymentMethod('card')">
+              <span class="tab-icon">&#128179;</span>
+              <span>Encrypted Card</span>
             </div>
+            <div class="payment-tab-btn" id="tab-crypto" onclick="switchPaymentMethod('crypto')">
+              <span class="tab-icon">&#128274;</span>
+              <span>Cold Vault Crypto</span>
+            </div>
+            <div class="payment-tab-btn" id="tab-wire" onclick="switchPaymentMethod('wire')">
+              <span class="tab-icon">&#127974;</span>
+              <span>Swiss Wire / Vault</span>
+            </div>
+            <div class="payment-tab-btn" id="tab-cod" onclick="switchPaymentMethod('cod')">
+              <span class="tab-icon">&#128230;</span>
+              <span>Safehouse COD</span>
+            </div>
+          </div>
 
-            <div class="row-2">
+          <!-- PAYMENT OPTION 1: CONTINENTAL GOLD COINS -->
+          <div class="payment-tab-pane active" id="pane-gold">
+            <div class="gold-coins-card">
+              <p style="font-size:0.85rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Standard High Table Exchange Rate (1 Coin = $1,000 USD)</p>
+              <div class="coins-count" id="gold-coins-needed">0 Coins</div>
+              <p style="font-size:0.9rem; color:var(--text-main);">Operative Vault Balance: <strong style="color:var(--accent-gold);">250 Gold Coins Available</strong></p>
+            </div>
+            <form id="gold-payment-form" onsubmit="handlePaymentSubmit(event, 'Continental Gold Coins')">
               <div class="form-group">
-                <label for="card-exp">Expiry (MM/YY) *</label>
-                <input type="text" id="card-exp" placeholder="12/28" maxlength="5">
-                <span class="error-msg" id="err-card-exp"></span>
+                <label for="gold-pin">Blood Oath Marker Ledger PIN *</label>
+                <input type="password" id="gold-pin" placeholder="Enter 6-digit Marker PIN (e.g. 770912)" value="770912" required>
               </div>
               <div class="form-group">
-                <label for="card-cvv">CVV *</label>
-                <input type="password" id="card-cvv" placeholder="880" maxlength="4">
-                <span class="error-msg" id="err-card-cvv"></span>
+                <label for="gold-safehouse">Delivery Continental Safehouse *</label>
+                <input type="text" id="gold-safehouse" value="Continental Hotel New York &mdash; High Table Armory Vault" required>
               </div>
-            </div>
+              <button type="submit" class="btn-primary">Authorize Gold Coin Transfer</button>
+            </form>
+          </div>
 
-            <button type="submit" class="btn-primary">Process Credit Card Requisition</button>
-          </form>
+          <!-- PAYMENT OPTION 2: ENCRYPTED CREDIT / DEBIT CARD -->
+          <div class="payment-tab-pane" id="pane-card">
+            <form id="payment-form" onsubmit="handlePaymentSubmit(event, 'High Table Encrypted Card')" novalidate>
+              <div class="form-group">
+                <label for="card-name">Cardholder Full Name *</label>
+                <input type="text" id="card-name" placeholder="John Wick">
+                <span class="error-msg" id="err-card-name"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="card-number">High Table Black Card / Credit Card Number *</label>
+                <input type="text" id="card-number" placeholder="4532 1122 3344 5566" maxlength="19">
+                <span class="error-msg" id="err-card-number"></span>
+              </div>
+
+              <div class="row-2">
+                <div class="form-group">
+                  <label for="card-exp">Expiry (MM/YY) *</label>
+                  <input type="text" id="card-exp" placeholder="12/28" maxlength="5">
+                  <span class="error-msg" id="err-card-exp"></span>
+                </div>
+                <div class="form-group">
+                  <label for="card-cvv">CVV / CVC *</label>
+                  <input type="password" id="card-cvv" placeholder="880" maxlength="4">
+                  <span class="error-msg" id="err-card-cvv"></span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary">Process Encrypted Card Requisition</button>
+            </form>
+          </div>
+
+          <!-- PAYMENT OPTION 3: COLD VAULT CRYPTO ESCROW -->
+          <div class="payment-tab-pane" id="pane-crypto">
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">
+              Send exact transaction total to the High Table Sovereign Multisig Cold Wallet. Instant automated block verification:
+            </p>
+            <div class="crypto-box">
+              <span>bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</span>
+              <button type="button" class="btn-test" style="flex:0; min-width:80px; padding:0.3rem 0.6rem;" onclick="copyCryptoAddress()">Copy</button>
+            </div>
+            <form onsubmit="handlePaymentSubmit(event, 'Cryptocurrency Cold Vault Escrow')">
+              <div class="form-group">
+                <label>Select Asset</label>
+                <select style="width:100%; padding:0.8rem; background:var(--bg-dark); border:1px solid var(--gunmetal-border); color:var(--text-main); border-radius:var(--radius);">
+                  <option>Bitcoin (BTC) &mdash; Sovereign Reserve</option>
+                  <option>Tether USD (USDT-TRC20) &mdash; Instant Escrow</option>
+                  <option>Monero (XMR) &mdash; Anonymous Untraceable Ledger</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Transaction Hash / TxID *</label>
+                <input type="text" placeholder="e.g. 0x8f3c77b4d..." value="0x7a29e41b9d034871e862c" required>
+              </div>
+              <button type="submit" class="btn-primary">Confirm Blockchain Escrow</button>
+            </form>
+          </div>
+
+          <!-- PAYMENT OPTION 4: SWISS ZURICH WIRE / VAULT -->
+          <div class="payment-tab-pane" id="pane-wire">
+            <div style="background:#0e1017; border:1px solid var(--gunmetal-border); padding:1rem; border-radius:var(--radius); margin-bottom:1rem; font-size:0.85rem; color:var(--text-muted); line-height:1.6;">
+              <p><strong style="color:var(--accent-gold);">Bank:</strong> Bank Leu / Credit Suisse Private Reserve Zurich</p>
+              <p><strong style="color:var(--accent-gold);">IBAN:</strong> CH93 0076 2011 6238 5299 1</p>
+              <p><strong style="color:var(--accent-gold);">Beneficiary:</strong> High Table Armaments Escrow Ltd.</p>
+              <p><strong style="color:var(--accent-gold);">SWIFT / BIC:</strong> CRESCHZZ80A</p>
+            </div>
+            <form onsubmit="handlePaymentSubmit(event, 'Swiss Zurich Wire Transfer')">
+              <div class="form-group">
+                <label>Originating Swiss Vault Account Number *</label>
+                <input type="text" placeholder="CH-XXXX-XXXX-XXXX" value="CH-9812-4401-7729" required>
+              </div>
+              <button type="submit" class="btn-primary">Execute Interbank Wire Requisition</button>
+            </form>
+          </div>
+
+          <!-- PAYMENT OPTION 5: SAFEHOUSE DEAD DROP / CASH ON DELIVERY -->
+          <div class="payment-tab-pane" id="pane-cod">
+            <div style="background:#0e1017; border:1px solid var(--gunmetal-border); padding:1rem; border-radius:var(--radius); margin-bottom:1rem; font-size:0.85rem; color:var(--text-muted); line-height:1.6;">
+              <p style="color:var(--accent-gold); font-weight:bold;">Anonymous Safehouse Dead Drop Courier</p>
+              <p>An armored Continental courier will deliver the sealed cases directly to your designated safehouse coordinates. Payment in unmarked currency or gold coin equivalent upon biometric verification.</p>
+            </div>
+            <form onsubmit="handlePaymentSubmit(event, 'Safehouse Dead Drop Courier (Cash on Delivery)')">
+              <div class="form-group">
+                <label>Safehouse Passphrase &amp; Verification Token *</label>
+                <input type="text" placeholder="Passphrase for Courier" value="Si vis pacem, para bellum" required>
+              </div>
+              <div class="form-group">
+                <label>Emergency Dead Drop Coordinate *</label>
+                <input type="text" placeholder="Safehouse Coordinates" value="Continental Armory Locker #412" required>
+              </div>
+              <button type="submit" class="btn-primary">Schedule Discreet Courier Drop</button>
+            </form>
+          </div>
+
         </div>
       </div>
     </section>
@@ -242,16 +521,23 @@
     <!-- SUCCESS CONFIRMATION SECTION -->
     <section id="page-success" class="page-section">
       <div class="status-card">
-        <h2 style="color: var(--accent-gold); font-size: 2rem;">Requisition Approved</h2>
-        <p style="margin: 1rem 0; color: var(--text-muted);">Payment authorized. Your tactical hardware allocation has been dished out by the Sommelier.</p>
-        <button class="btn-secondary" onclick="navigateTo('home')">Return to Home</button>
+        <h2 style="color: var(--accent-gold); font-size: 2rem;">&#10003; Requisition Approved</h2>
+        <p style="margin: 1rem 0; color: var(--text-muted);" id="success-method-msg">
+          Settlement authorized. Your tactical hardware allocation has been dished out by the Continental Sommelier.
+        </p>
+        <div style="background:#0e1017; border:1px solid var(--accent-gold); padding:1.2rem; border-radius:var(--radius); max-width:400px; margin:1.5rem auto; text-align:left;">
+          <p><strong style="color:var(--accent-gold);">Allocation ID:</strong> #JW-884920</p>
+          <p><strong style="color:var(--accent-gold);">Status:</strong> Pre-dispatched to Safehouse</p>
+          <p><strong style="color:var(--accent-gold);">Sommelier:</strong> Armed &amp; Sealed</p>
+        </div>
+        <button class="btn-secondary" onclick="navigateTo('catalog')">Return to Armory Catalog</button>
       </div>
     </section>
 
   </main>
 
   <footer class="footer">
-    <p>&copy; 2026 JOHN WICK & CO. ARMS. All rights reserved under Continental jurisdiction.</p>
+    <p>&copy; 2026 JOHN WICK &amp; CO. ARMS. All rights reserved under Continental jurisdiction.</p>
   </footer>
 
   <!-- Scripts -->
