@@ -666,55 +666,73 @@ r_out.font.name = "Times New Roman"
 
 screenshots = [
     ("Screenshot 1: Home Page & Tactical Arsenal Showcase (index.php)",
-     "Displays the Continental Hero Banner, Sommelier Selection, and featured weapons with prices and direct Add-to-Cart actions."),
+     "Displays the Continental Hero Banner, Sommelier Selection, and featured weapons with prices and direct Add-to-Cart actions.",
+     "screenshot_01_home.png"),
     
     ("Screenshot 2: Armory Catalog with Category Filter & 18 Weapons (catalog.php)",
-     "Shows the complete armory catalog containing all 18 authentic weapons filtered by Sidearms, Shotguns, SMGs, and Rifles."),
+     "Shows the complete armory catalog containing all 18 authentic weapons filtered by Sidearms, Shotguns, SMGs, and Rifles.",
+     "screenshot_02_catalog.png"),
 
     ("Screenshot 3: Weapon Specification & Detail View (weapon_detail.php)",
-     "Dedicated technical specification breakdown: Caliber, Capacity, Barrel Length, Effective Range, Sommelier tasting notes, and procurement controls."),
+     "Dedicated technical specification breakdown: Caliber, Capacity, Barrel Length, Effective Range, Sommelier tasting notes, and procurement controls.",
+     "screenshot_03_weapon_detail.png"),
 
     ("Screenshot 4: Operative Registration with Weapon Clearance Credentials (register.php)",
-     "Enhanced registration form capturing Clearance Tier, Blood Oath Marker code, Duty Station, Phone, and Safehouse delivery coordinates."),
+     "Enhanced registration form capturing Clearance Tier, Blood Oath Marker code, Duty Station, Phone, and Safehouse delivery coordinates.",
+     "screenshot_04_register.png"),
 
     ("Screenshot 5: Operative Authentication with 1-Click Test User Auto-Fill (login.php)",
-     "Secure login page equipped with 1-click demo test credentials for rapid evaluation (wick@continental.com / continental123)."),
+     "Secure login page equipped with 1-click demo test credentials for rapid evaluation (wick@continental.com / continental123).",
+     "screenshot_05_login.png"),
 
     ("Screenshot 6: Shopping Cart & Requisition Ledger (cart.php)",
-     "Active shopping cart showing selected weapons, quantities, itemized subtotals, grand total in USD, and Continental Gold Coin equivalents."),
+     "Active shopping cart showing selected weapons, quantities, itemized subtotals, grand total in USD, and Continental Gold Coin equivalents.",
+     "screenshot_06_cart.png"),
 
     ("Screenshot 7: Requisition Checkout with Multiple Professional Payment Options (checkout.php)",
-     "Multi-channel settlement form featuring Continental Gold Coins, High Table Encrypted Card, Crypto Escrow, Swiss Wire, and Safehouse COD."),
+     "Multi-channel settlement form featuring Continental Gold Coins, High Table Encrypted Card, Crypto Escrow, Swiss Wire, and Safehouse COD.",
+     "screenshot_07_checkout_payment.png"),
 
     ("Screenshot 8: Requisition Approved & Order Confirmation Screen (order_success.php)",
-     "Order approval confirmation screen displaying generated Order ID, authorized settlement method, and tracking links."),
+     "Order approval confirmation screen displaying generated Order ID, authorized settlement method, and tracking links.",
+     "screenshot_08_order_success.png"),
 
     ("Screenshot 9: Customer 'My Orders' History & Live Tracking (my_orders.php)",
-     "Historical requisition log listing order IDs, items ordered, total amounts, settlement methods, and real-time status badges."),
+     "Historical requisition log listing order IDs, items ordered, total amounts, settlement methods, and real-time status badges.",
+     "screenshot_09_my_orders.png"),
 
     ("Screenshot 10: Admin Command Center Authentication (admin/index.php)",
-     "Administrative login gateway protecting management functionality from unauthorized access."),
+     "Administrative login gateway protecting management functionality from unauthorized access.",
+     "screenshot_10_admin_login.png"),
 
     ("Screenshot 11: Admin Command Dashboard & Analytics (admin/dashboard.php)",
-     "Overview metrics showing Total Weapons in Armory, Total Orders, Registered Operatives, Revenue, and Recent Orders summary."),
+     "Overview metrics showing Total Weapons in Armory, Total Orders, Registered Operatives, Revenue, and Recent Orders summary.",
+     "screenshot_11_admin_dashboard.png"),
 
     ("Screenshot 12: Admin Weapon Inventory Management CRUD Table (admin/weapons.php)",
-     "CRUD inventory management table listing all tactical weapons with image previews, pricing, and Edit/Delete controls."),
+     "CRUD inventory management table listing all tactical weapons with image previews, pricing, and Edit/Delete controls.",
+     "screenshot_12_admin_weapons.png"),
 
     ("Screenshot 13: Admin Add New Weapon Form (admin/add_weapon.php)",
-     "Admin form to upload new armory items with category selection, caliber specification, price setting, description, and status controls."),
+     "Admin form to upload new armory items with category selection, caliber specification, price setting, description, and status controls.",
+     "screenshot_13_admin_add_weapon.png"),
 
     ("Screenshot 14: Admin Edit Weapon Specifications (admin/edit_weapon.php)",
-     "Administrative modification form to update firearm specifications, pricing, and stock availability."),
+     "Administrative modification form to update firearm specifications, pricing, and stock availability.",
+     "screenshot_14_admin_edit_weapon.png"),
 
     ("Screenshot 15: Admin Customer Orders Management & Status Update (admin/orders.php)",
-     "Order management portal with status filtering and inline dropdown to update order status (Pending, Processing, Dispatched, Delivered)."),
+     "Order management portal with status filtering and inline dropdown to update order status (Pending, Processing, Dispatched, Delivered).",
+     "screenshot_15_admin_orders.png"),
 
     ("Screenshot 16: MySQL Database Schema in phpMyAdmin",
-     "Relational database structure illustrating admin_users, customers, weapons (18 items), orders, and order_items tables.")
+     "Relational database structure illustrating admin_users, customers, weapons (18 items), orders, and order_items tables.",
+     "screenshot_16_db_schema.png")
 ]
 
-for title, desc in screenshots:
+screenshots_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "screenshots")
+
+for title, desc, img_file in screenshots:
     p_st = doc.add_paragraph()
     p_st.paragraph_format.space_before = Pt(10)
     p_st.paragraph_format.space_after = Pt(4)
@@ -735,36 +753,35 @@ for title, desc in screenshots:
     r_sd.font.name = "Times New Roman"
     r_sd.font.color.rgb = RGBColor(90, 90, 90)
 
-    # Add framed callout table as screenshot placeholder with sufficient space
+    # Embed real screenshot image in framed presentation table
+    img_path = os.path.join(screenshots_dir, img_file)
+    
     table = doc.add_table(rows=1, cols=1)
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
     cell = table.cell(0, 0)
     cell.width = Inches(6.8)
     
-    set_cell_borders(cell, color="999999", sz="8", val="dashed")
-    set_cell_background(cell, "F7F8FA")
-
-    p_box = cell.paragraphs[0]
-    p_box.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_box.paragraph_format.space_before = Pt(45)
-    p_box.paragraph_format.space_after = Pt(45)
-    
-    r_box1 = p_box.add_run(f"[ PASTE SCREENSHOT HERE ]\n")
-    r_box1.bold = True
-    r_box1.font.size = Pt(11)
-    r_box1.font.name = "Times New Roman"
-    r_box1.font.color.rgb = RGBColor(120, 120, 120)
-
-    r_box2 = p_box.add_run(f"{title}\n")
-    r_box2.font.size = Pt(9.5)
-    r_box2.font.name = "Times New Roman"
-    r_box2.font.color.rgb = RGBColor(150, 150, 150)
-
-    r_box3 = p_box.add_run("(Recommended dimensions: 6.5 in × 3.6 in)")
-    r_box3.font.size = Pt(8.5)
-    r_box3.font.name = "Times New Roman"
-    r_box3.italic = True
-    r_box3.font.color.rgb = RGBColor(180, 180, 180)
+    if os.path.exists(img_path):
+        set_cell_borders(cell, color="CCCCCC", sz="4", val="single")
+        set_cell_background(cell, "FFFFFF")
+        p_box = cell.paragraphs[0]
+        p_box.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_box.paragraph_format.space_before = Pt(4)
+        p_box.paragraph_format.space_after = Pt(4)
+        r_box = p_box.add_run()
+        r_box.add_picture(img_path, width=Inches(6.4))
+    else:
+        set_cell_borders(cell, color="999999", sz="8", val="dashed")
+        set_cell_background(cell, "F7F8FA")
+        p_box = cell.paragraphs[0]
+        p_box.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_box.paragraph_format.space_before = Pt(45)
+        p_box.paragraph_format.space_after = Pt(45)
+        r_box1 = p_box.add_run("[ PASTE SCREENSHOT HERE ]\n")
+        r_box1.bold = True
+        r_box1.font.size = Pt(11)
+        r_box1.font.name = "Times New Roman"
+        r_box1.font.color.rgb = RGBColor(120, 120, 120)
 
     p_sp = doc.add_paragraph()
     p_sp.paragraph_format.space_before = Pt(4)

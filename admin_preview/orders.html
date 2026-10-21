@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Orders | Admin — JOHN WICK & CO. ARMS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .admin-nav { display:flex; gap:1.2rem; align-items:center; }
+    .admin-nav a { text-decoration:none; color:var(--text-main); font-weight:600; font-size:0.95rem; }
+    .admin-nav a.active { color:var(--accent-gold); border-bottom:2px solid var(--accent-gold); padding-bottom:4px; }
+    table { width:100%; border-collapse:collapse; margin-top:1.5rem; background:var(--bg-card); border:1px solid var(--gunmetal-border); border-radius:var(--radius); }
+    th, td { padding:1rem; text-align:left; border-bottom:1px solid var(--gunmetal-border); }
+    th { color:var(--accent-gold); font-family:'Cinzel', serif; background:rgba(212,175,55,0.08); font-size:0.85rem; }
+    td { color:var(--text-main); font-size:0.88rem; }
+    .status-select { background:var(--bg-dark); border:1px solid var(--accent-gold); color:var(--text-main); padding:0.4rem 0.6rem; border-radius:4px; font-size:0.85rem; }
+    .status-badge { display:inline-block; padding:0.3rem 0.7rem; border-radius:4px; font-size:0.75rem; font-weight:700; text-transform:uppercase; }
+    .badge-pending { background:rgba(243,156,18,0.2); color:#f39c12; border:1px solid #f39c12; }
+    .badge-processing { background:rgba(52,152,219,0.2); color:#3498db; border:1px solid #3498db; }
+    .badge-approved { background:rgba(39,174,96,0.2); color:#27ae60; border:1px solid #27ae60; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="dashboard.html" class="logo">
+        <span class="gold-text">JOHN WICK &amp; CO.</span> ARMS
+        <span class="logo-sub">CONTINENTAL ARMS - COMMAND DESK</span>
+      </a>
+      <nav class="admin-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="weapons.html">Weapons Inventory (18)</a>
+        <a href="add_weapon.html">+ Add Weapon</a>
+        <a href="orders.html" class="active">Orders Ledger (5)</a>
+        <a href="../index.html" class="btn-gold-sm" style="color:var(--bg-dark)!important;">Logout Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-section active">
+    <div class="catalog-container">
+      <h2 class="section-title" style="text-align:left; margin-bottom:0.2rem;">Operative Requisitions Ledger</h2>
+      <p style="color:var(--text-muted); font-size:0.9rem;">Review high-caliber armory purchase orders, verify clearance, and update logistics status.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Operative</th>
+            <th>Requisition Summary</th>
+            <th>Clearance Level</th>
+            <th>Settlement Method</th>
+            <th>Total ($)</th>
+            <th>Update Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>#ORD-90812</strong></td>
+            <td>John Wick<br><span style="color:var(--text-muted); font-size:0.8rem;">wick@continental.nyc</span></td>
+            <td>1x TTI JW4 Pit Viper, 2x Benelli M4</td>
+            <td><span style="color:var(--accent-gold); font-weight:700;">LEVEL 5: BABA YAGA</span></td>
+            <td>Continental Gold Coins (5 Coins)</td>
+            <td><strong style="color:var(--accent-gold);">$23,500</strong></td>
+            <td>
+              <select class="status-select">
+                <option selected>Pending</option>
+                <option>Processing</option>
+                <option>Dispatched</option>
+                <option>Delivered</option>
+                <option>Cancelled</option>
+              </select>
+            </td>
+            <td><button class="btn-gold-sm" style="font-size:0.75rem; padding:0.3rem 0.8rem;">Update</button></td>
+          </tr>
+          <tr>
+            <td><strong>#ORD-90811</strong></td>
+            <td>Sofia Al-Azwar<br><span style="color:var(--text-muted); font-size:0.8rem;">sofia@continental.ma</span></td>
+            <td>1x SIG Sauer MPX, 1x TTI Combat Master</td>
+            <td><span style="color:var(--accent-gold); font-weight:700;">LEVEL 4: HIGH TABLE</span></td>
+            <td>Swiss Private Bank Escrow</td>
+            <td><strong style="color:var(--accent-gold);">$8,300</strong></td>
+            <td>
+              <select class="status-select">
+                <option>Pending</option>
+                <option selected>Processing</option>
+                <option>Dispatched</option>
+                <option>Delivered</option>
+              </select>
+            </td>
+            <td><button class="btn-gold-sm" style="font-size:0.75rem; padding:0.3rem 0.8rem;">Update</button></td>
+          </tr>
+          <tr>
+            <td><strong>#ORD-90810</strong></td>
+            <td>Caine<br><span style="color:var(--text-muted); font-size:0.8rem;">caine@high-table.int</span></td>
+            <td>1x Genesis Gen-12 Breacher</td>
+            <td><span style="color:var(--accent-gold); font-weight:700;">LEVEL 4: HIGH TABLE</span></td>
+            <td>High Table Encrypted Card</td>
+            <td><strong style="color:var(--accent-gold);">$6,800</strong></td>
+            <td>
+              <select class="status-select">
+                <option>Pending</option>
+                <option>Processing</option>
+                <option selected>Dispatched</option>
+                <option>Delivered</option>
+              </select>
+            </td>
+            <td><button class="btn-gold-sm" style="font-size:0.75rem; padding:0.3rem 0.8rem;">Update</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+</html>

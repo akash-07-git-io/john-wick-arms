@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>phpMyAdmin 5.2.1 — john_wick_arms Schema</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Tahoma, 'Segoe UI', Arial, sans-serif; }
+    body { background:#f3f3f3; color:#333; font-size:12px; }
+    .pma-header { background:#fff; border-bottom:1px solid #ddd; padding:8px 16px; display:flex; align-items:center; justify-content:space-between; }
+    .pma-logo { font-size:18px; font-weight:bold; color:#f08a00; display:flex; align-items:center; gap:8px; }
+    .pma-logo span { color:#333; font-size:14px; }
+    .pma-server { font-size:11px; color:#666; }
+    .pma-layout { display:flex; min-height:calc(100vh - 45px); }
+    .pma-sidebar { width:240px; background:#fff; border-right:1px solid #ddd; padding:12px; font-size:11px; }
+    .pma-sidebar h4 { color:#555; margin-bottom:8px; font-size:12px; display:flex; align-items:center; gap:6px; }
+    .pma-table-list { list-style:none; padding-left:14px; }
+    .pma-table-list li { padding:4px 0; color:#0055aa; cursor:pointer; display:flex; align-items:center; gap:6px; }
+    .pma-table-list li:hover { text-decoration:underline; }
+    .pma-main { flex:1; padding:16px 24px; background:#fbfbfb; }
+    .pma-breadcrumb { font-size:13px; color:#555; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid #e0e0e0; }
+    .pma-breadcrumb strong { color:#0055aa; }
+    .pma-tabs { display:flex; gap:2px; margin-bottom:16px; border-bottom:1px solid #ccc; }
+    .pma-tab { padding:6px 14px; background:#e0e0e0; border:1px solid #ccc; border-bottom:none; border-radius:3px 3px 0 0; color:#333; font-weight:bold; text-decoration:none; }
+    .pma-tab.active { background:#fff; border-bottom:1px solid #fff; color:#f08a00; margin-bottom:-1px; }
+    .schema-card { background:#fff; border:1px solid #ccc; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.06); margin-bottom:18px; }
+    .schema-title { background:#e8eff7; padding:8px 12px; font-weight:bold; color:#004080; border-bottom:1px solid #b8d0ed; display:flex; justify-content:space-between; }
+    table.data-table { width:100%; border-collapse:collapse; text-align:left; font-size:11px; }
+    table.data-table th { background:#f5f5f5; padding:6px 10px; border-bottom:1px solid #ddd; border-right:1px solid #eee; color:#444; }
+    table.data-table td { padding:6px 10px; border-bottom:1px solid #eee; border-right:1px solid #eee; font-family:'Courier New', monospace; font-size:11px; }
+    table.data-table tr:nth-child(even) { background:#fafafa; }
+    .key-icon { color:#e67e22; font-weight:bold; font-size:10px; margin-right:4px; }
+    .fk-icon { color:#3498db; font-weight:bold; font-size:10px; margin-right:4px; }
+  </style>
+</head>
+<body>
+  <div class="pma-header">
+    <div class="pma-logo">
+      phpMyAdmin <span>5.2.1</span>
+    </div>
+    <div class="pma-server">Server: 127.0.0.1:3306 &bull; Server version: 8.0.33-MySQL Community Server &bull; Protocol: TCP/IP &bull; User: root@localhost</div>
+  </div>
+
+  <div class="pma-layout">
+    <div class="pma-sidebar">
+      <h4>&#128190; Database: john_wick_arms</h4>
+      <ul class="pma-table-list">
+        <li>&#128196; admin_users (1 row)</li>
+        <li>&#128196; customers (5 rows)</li>
+        <li>&#128196; weapons (18 rows)</li>
+        <li>&#128196; orders (5 rows)</li>
+        <li>&#128196; order_items (12 rows)</li>
+      </ul>
+    </div>
+
+    <div class="pma-main">
+      <div class="pma-breadcrumb">
+        Server: <strong>127.0.0.1</strong> &raquo; Database: <strong>john_wick_arms</strong> &raquo; Structure &amp; Relations Schema
+      </div>
+
+      <div class="pma-tabs">
+        <div class="pma-tab active">Structure</div>
+        <div class="pma-tab">SQL</div>
+        <div class="pma-tab">Search</div>
+        <div class="pma-tab">Query</div>
+        <div class="pma-tab">Export</div>
+        <div class="pma-tab">Import</div>
+        <div class="pma-tab">Designer</div>
+      </div>
+
+      <!-- Weapons Table Schema -->
+      <div class="schema-card">
+        <div class="schema-title">
+          <span>Table: `weapons` (18 rows - InnoDB, utf8mb4_unicode_ci)</span>
+          <span style="font-size:11px; font-weight:normal; color:#666;">Size: 48.0 KiB</span>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Type</th><th>Collation</th><th>Null</th><th>Default</th><th>Extra</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><span class="key-icon">&#128273;</span>weapon_id</td><td>int(11)</td><td>-</td><td>No</td><td>None</td><td>AUTO_INCREMENT (Primary Key)</td></tr>
+            <tr><td>2</td><td>name</td><td>varchar(150)</td><td>utf8mb4_unicode_ci</td><td>No</td><td>None</td><td></td></tr>
+            <tr><td>3</td><td>category</td><td>enum('Sidearms','Shotguns','Submachine Guns','Rifles')</td><td>utf8mb4_unicode_ci</td><td>No</td><td>None</td><td></td></tr>
+            <tr><td>4</td><td>price</td><td>decimal(10,2)</td><td>-</td><td>No</td><td>None</td><td></td></tr>
+            <tr><td>5</td><td>description</td><td>text</td><td>utf8mb4_unicode_ci</td><td>Yes</td><td>NULL</td><td></td></tr>
+            <tr><td>6</td><td>image</td><td>varchar(255)</td><td>utf8mb4_unicode_ci</td><td>Yes</td><td>NULL</td><td></td></tr>
+            <tr><td>7</td><td>status</td><td>enum('available','out_of_stock')</td><td>utf8mb4_unicode_ci</td><td>No</td><td>'available'</td><td></td></tr>
+            <tr><td>8</td><td>created_at</td><td>timestamp</td><td>-</td><td>No</td><td>CURRENT_TIMESTAMP</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Orders & Order Items Schema -->
+      <div class="schema-card">
+        <div class="schema-title">
+          <span>Table: `orders` &amp; `order_items` (Foreign Key Relationship)</span>
+          <span style="font-size:11px; font-weight:normal; color:#666;">InnoDB Referential Integrity</span>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Table</th><th>Column</th><th>Type</th><th>Constraint</th><th>Referenced Table / Column</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>orders</td><td><span class="key-icon">&#128273;</span>order_id</td><td>int(11)</td><td>PRIMARY KEY</td><td>AUTO_INCREMENT</td></tr>
+            <tr><td>orders</td><td><span class="fk-icon">&#8599;</span>customer_id</td><td>int(11)</td><td>FOREIGN KEY</td><td>`customers` (`customer_id`) ON DELETE CASCADE</td></tr>
+            <tr><td>order_items</td><td><span class="key-icon">&#128273;</span>item_id</td><td>int(11)</td><td>PRIMARY KEY</td><td>AUTO_INCREMENT</td></tr>
+            <tr><td>order_items</td><td><span class="fk-icon">&#8599;</span>order_id</td><td>int(11)</td><td>FOREIGN KEY</td><td>`orders` (`order_id`) ON DELETE CASCADE</td></tr>
+            <tr><td>order_items</td><td><span class="fk-icon">&#8599;</span>weapon_id</td><td>int(11)</td><td>FOREIGN KEY</td><td>`weapons` (`weapon_id`) ON DELETE CASCADE</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

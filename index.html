@@ -22,11 +22,13 @@
       <nav class="nav-links">
         <a class="nav-item active" data-page="home" onclick="navigateTo('home')">Home</a>
         <a class="nav-item" data-page="catalog" onclick="navigateTo('catalog')">Armory Catalog</a>
+        <a class="nav-item" data-page="cart" onclick="navigateTo('cart')">Cart (<span id="cart-count">0</span>)</a>
+        <a class="nav-item" data-page="payment" onclick="navigateTo('payment')">Checkout</a>
         <a class="nav-item" data-page="events" onclick="navigateTo('events')">High Table Events</a>
         <a class="nav-item" data-page="register" id="nav-register" onclick="navigateTo('register')">Register</a>
         <a class="nav-item" data-page="login" id="nav-login" onclick="navigateTo('login')">Login</a>
-        <a class="nav-item" data-page="profile" id="nav-profile" onclick="navigateTo('profile')" style="display:none;">Profile</a>
-        <a class="nav-item" data-page="payment" onclick="navigateTo('payment')">Requisition Cart (<span id="cart-count">0</span>)</a>
+        <a class="nav-item" data-page="profile" id="nav-profile" onclick="navigateTo('profile')" style="display:none;">Profile &amp; Orders</a>
+        <a class="nav-item" href="admin_preview/dashboard.html" style="color:var(--accent-gold); font-weight:700;">Admin Panel</a>
       </nav>
     </div>
   </header>
@@ -323,15 +325,15 @@
           </div>
           <div class="profile-row">
             <span class="profile-label">Operative Name:</span>
-            <span class="profile-val" id="profile-display-name">--</span>
+            <span class="profile-val" id="profile-display-name">John Wick</span>
           </div>
           <div class="profile-row">
             <span class="profile-label">Email Address:</span>
-            <span class="profile-val" id="profile-display-email">--</span>
+            <span class="profile-val" id="profile-display-email">wick@continental.nyc</span>
           </div>
           <div class="profile-row">
             <span class="profile-label">Clearance Tier:</span>
-            <span class="profile-val" id="profile-display-tier">Tier 2 &mdash; Sovereign Continental Diplomat</span>
+            <span class="profile-val" id="profile-display-tier">Level 5 &mdash; Baba Yaga Sovereign Diplomat</span>
           </div>
           <div class="profile-row">
             <span class="profile-label">Blood Oath Marker:</span>
@@ -339,7 +341,7 @@
           </div>
           <div class="profile-row">
             <span class="profile-label">Registered Events:</span>
-            <span class="profile-val" id="profile-display-events">None</span>
+            <span class="profile-val" id="profile-display-events">High Table Sovereign Summit &bull; Continental Sommelier Gala</span>
           </div>
           <div class="profile-row">
             <span class="profile-label">Ledger Balance:</span>
@@ -347,7 +349,76 @@
           </div>
         </div>
 
-        <button class="btn-secondary" onclick="handleLogout()">Logout Operative Session</button>
+        <!-- REQUISITIONS & ORDER HISTORY (my_orders.php model) -->
+        <div style="margin-top:2rem;">
+          <h3 style="color:var(--accent-gold); font-family:'Cinzel', serif; margin-bottom:0.8rem; font-size:1.2rem;">Armory Requisitions &amp; Dispatch History</h3>
+          <div style="background:var(--bg-dark); border:1px solid var(--gunmetal-border); border-radius:var(--radius); overflow:hidden;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+              <thead>
+                <tr style="background:rgba(212,175,55,0.08); border-bottom:1px solid var(--gunmetal-border); text-align:left;">
+                  <th style="padding:0.8rem; color:var(--accent-gold);">Requisition ID</th>
+                  <th style="padding:0.8rem; color:var(--accent-gold);">Weapon Hardware</th>
+                  <th style="padding:0.8rem; color:var(--accent-gold);">Valuation</th>
+                  <th style="padding:0.8rem; color:var(--accent-gold);">Logistics Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--gunmetal-border);">
+                  <td style="padding:0.8rem;"><strong>#ORD-90812</strong><br><span style="color:var(--text-muted); font-size:0.75rem;">2026-10-21</span></td>
+                  <td style="padding:0.8rem;">1x TTI JW4 Pit Viper, 1x Benelli M4</td>
+                  <td style="padding:0.8rem; color:var(--accent-gold); font-weight:bold;">$12,700</td>
+                  <td style="padding:0.8rem;"><span style="background:rgba(39,174,96,0.2); color:#27ae60; padding:0.2rem 0.6rem; border-radius:3px; font-size:0.75rem; font-weight:700;">APPROVED &bull; DISPATCHED</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--gunmetal-border);">
+                  <td style="padding:0.8rem;"><strong>#ORD-90784</strong><br><span style="color:var(--text-muted); font-size:0.75rem;">2026-10-14</span></td>
+                  <td style="padding:0.8rem;">2x SIG Sauer MPX Copperhead</td>
+                  <td style="padding:0.8rem; color:var(--accent-gold); font-weight:bold;">$8,800</td>
+                  <td style="padding:0.8rem;"><span style="background:rgba(52,152,219,0.2); color:#3498db; padding:0.2rem 0.6rem; border-radius:3px; font-size:0.75rem; font-weight:700;">DELIVERED TO SAFEHOUSE</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem; text-align:center;">
+          <button class="btn-secondary" onclick="handleLogout()">Logout Operative Session</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7B. SHOPPING CART & REQUISITION LEDGER PAGE VIEW (cart.php model) -->
+    <section id="page-cart" class="page-section">
+      <div class="hero-banner payment-hero">
+        <span class="badge">Tactical Requisition Ledger</span>
+        <h1 class="hero-title">SHOPPING CART &amp; ALLOCATIONS</h1>
+        <p class="hero-sub">Review armory inventory allocations before authorizing High Table settlement</p>
+      </div>
+
+      <div class="catalog-container" style="max-width:980px; margin:2rem auto;">
+        <div style="background:var(--bg-card); border:1px solid var(--gunmetal-border); border-radius:var(--radius); padding:2rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:1px solid var(--gunmetal-border); padding-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <h2 class="section-title" style="text-align:left; margin-bottom:0.2rem;">Armory Requisition Ledger</h2>
+              <p style="color:var(--text-muted); font-size:0.88rem;">Continental Safehouse Dispatch Staging</p>
+            </div>
+            <button class="btn-secondary" style="width:auto; padding:0.5rem 1.2rem; font-size:0.85rem;" onclick="navigateTo('catalog')">+ Browse More Weapons</button>
+          </div>
+
+          <div id="dedicated-cart-items-list" class="cart-items-list">
+            <!-- Populated dynamically via JS -->
+          </div>
+
+          <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--gunmetal-border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
+            <div>
+              <div style="color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; letter-spacing:1px;">Ledger Valuation:</div>
+              <div id="dedicated-cart-total-price" style="color:var(--accent-gold); font-size:2rem; font-weight:700; font-family:'Cinzel', serif;">$0</div>
+            </div>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+              <button class="btn-secondary" style="width:auto; padding:0.8rem 1.8rem;" onclick="clearCart()">Empty Cart</button>
+              <button class="btn-primary" style="width:auto; padding:0.8rem 2.2rem;" onclick="navigateTo('payment')">Proceed to Tactical Checkout &raquo;</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -537,7 +608,15 @@
   </main>
 
   <footer class="footer">
-    <p>&copy; 2026 JOHN WICK &amp; CO. ARMS. All rights reserved under Continental jurisdiction.</p>
+    <div style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding:0 1.5rem;">
+      <p>&copy; 2026 JOHN WICK &amp; CO. ARMS. All rights reserved under Continental jurisdiction.</p>
+      <div style="display:flex; gap:1.2rem; font-size:0.9rem;">
+        <a href="admin_preview/dashboard.html" style="color:var(--accent-gold); text-decoration:none; font-weight:600;">Admin Dashboard</a>
+        <a href="admin_preview/weapons.html" style="color:var(--text-muted); text-decoration:none;">Weapon Inventory</a>
+        <a href="admin_preview/orders.html" style="color:var(--text-muted); text-decoration:none;">Orders Ledger</a>
+        <a href="admin_preview/db_schema.html" style="color:var(--text-muted); text-decoration:none;">Database Schema</a>
+      </div>
+    </div>
   </footer>
 
   <!-- Scripts -->

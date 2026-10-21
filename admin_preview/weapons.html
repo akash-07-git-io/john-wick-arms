@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Weapons | Admin — JOHN WICK & CO. ARMS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .admin-nav { display:flex; gap:1.2rem; align-items:center; }
+    .admin-nav a { text-decoration:none; color:var(--text-main); font-weight:600; font-size:0.95rem; }
+    .admin-nav a.active { color:var(--accent-gold); border-bottom:2px solid var(--accent-gold); padding-bottom:4px; }
+    table { width:100%; border-collapse:collapse; margin-top:1.5rem; background:var(--bg-card); border:1px solid var(--gunmetal-border); border-radius:var(--radius); }
+    th, td { padding:0.9rem; text-align:left; border-bottom:1px solid var(--gunmetal-border); vertical-align:middle; }
+    th { color:var(--accent-gold); font-family:'Cinzel', serif; background:rgba(212,175,55,0.08); font-size:0.85rem; }
+    td { color:var(--text-main); font-size:0.88rem; }
+    .thumb-img { width:65px; height:45px; object-fit:contain; background:#0d0e14; border:1px solid var(--gunmetal-border); border-radius:4px; }
+    .btn-action { display:inline-block; padding:0.3rem 0.7rem; border-radius:4px; font-size:0.8rem; text-decoration:none; font-weight:600; margin-right:0.3rem; }
+    .btn-edit { background:rgba(212,175,55,0.15); color:var(--accent-gold); border:1px solid var(--accent-gold); }
+    .btn-delete { background:rgba(231,76,60,0.15); color:#e74c3c; border:1px solid #e74c3c; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="dashboard.html" class="logo">
+        <span class="gold-text">JOHN WICK &amp; CO.</span> ARMS
+        <span class="logo-sub">CONTINENTAL ARMS - COMMAND DESK</span>
+      </a>
+      <nav class="admin-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="weapons.html" class="active">Weapons Inventory (18)</a>
+        <a href="add_weapon.html">+ Add Weapon</a>
+        <a href="orders.html">Orders Ledger</a>
+        <a href="../index.html" class="btn-gold-sm" style="color:var(--bg-dark)!important;">Logout Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-section active">
+    <div class="catalog-container">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <h2 class="section-title" style="text-align:left; margin-bottom:0.2rem;">Weapon Arsenal Inventory</h2>
+          <p style="color:var(--text-muted); font-size:0.9rem;">Total active armory units: 18 firearms across 4 classifications</p>
+        </div>
+        <a href="add_weapon.html" class="btn-primary" style="text-decoration:none; width:auto; padding:0.6rem 1.6rem;">+ Provision New Firearm</a>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Visual</th>
+            <th>Nomenclature & Model</th>
+            <th>Classification</th>
+            <th>Caliber</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#W01</td>
+            <td><img src="../images/pit_viper.jpg" class="thumb-img" alt="Pit Viper"></td>
+            <td><strong>TTI JW4 Pit Viper</strong></td>
+            <td>Sidearms</td>
+            <td>9x19mm Major</td>
+            <td><strong style="color:var(--accent-gold);">$7,500</strong></td>
+            <td><span style="color:#27ae60; font-weight:600;">Available</span></td>
+            <td>
+              <a href="edit_weapon.html" class="btn-action btn-edit">Edit</a>
+              <a href="#" class="btn-action btn-delete">Archive</a>
+            </td>
+          </tr>
+          <tr>
+            <td>#W02</td>
+            <td><img src="../images/combat_master_jw2.jpg" class="thumb-img" alt="Combat Master"></td>
+            <td><strong>TTI Glock 34 Combat Master</strong></td>
+            <td>Sidearms</td>
+            <td>9x19mm Parabellum</td>
+            <td><strong style="color:var(--accent-gold);">$3,900</strong></td>
+            <td><span style="color:#27ae60; font-weight:600;">Available</span></td>
+            <td>
+              <a href="edit_weapon.html" class="btn-action btn-edit">Edit</a>
+              <a href="#" class="btn-action btn-delete">Archive</a>
+            </td>
+          </tr>
+          <tr>
+            <td>#W03</td>
+            <td><img src="../images/benelli_m4.jpg" class="thumb-img" alt="Benelli M4"></td>
+            <td><strong>Benelli M4 Super 90 Tactical</strong></td>
+            <td>Shotguns</td>
+            <td>12 Gauge</td>
+            <td><strong style="color:var(--accent-gold);">$5,200</strong></td>
+            <td><span style="color:#27ae60; font-weight:600;">Available</span></td>
+            <td>
+              <a href="edit_weapon.html" class="btn-action btn-edit">Edit</a>
+              <a href="#" class="btn-action btn-delete">Archive</a>
+            </td>
+          </tr>
+          <tr>
+            <td>#W04</td>
+            <td><img src="../images/gen12_dragons_breath.jpg" class="thumb-img" alt="Genesis Gen-12"></td>
+            <td><strong>Genesis Arms Gen-12 Breacher</strong></td>
+            <td>Shotguns</td>
+            <td>12 Gauge Dragon's Breath</td>
+            <td><strong style="color:var(--accent-gold);">$6,800</strong></td>
+            <td><span style="color:#27ae60; font-weight:600;">Available</span></td>
+            <td>
+              <a href="edit_weapon.html" class="btn-action btn-edit">Edit</a>
+              <a href="#" class="btn-action btn-delete">Archive</a>
+            </td>
+          </tr>
+          <tr>
+            <td>#W05</td>
+            <td><img src="../images/sig_mpx.jpg" class="thumb-img" alt="SIG MPX"></td>
+            <td><strong>SIG Sauer MPX Copperhead</strong></td>
+            <td>Submachine Guns</td>
+            <td>9x19mm Parabellum</td>
+            <td><strong style="color:var(--accent-gold);">$4,400</strong></td>
+            <td><span style="color:#27ae60; font-weight:600;">Available</span></td>
+            <td>
+              <a href="edit_weapon.html" class="btn-action btn-edit">Edit</a>
+              <a href="#" class="btn-action btn-delete">Archive</a>
+            </td>
+          </tr>
+          <tr>
+            <td>#W06</td>
+            <td><img src="../images/cheytac_m200.jpg" class="thumb-img" alt="CheyTac M200"></td>
+            <td><strong>CheyTac M200 Intervention</strong></td>
+            <td>Rifles</td>
+            <td>.408 CheyTac</td>
+            <td><strong style="color:var(--accent-gold);">$13,500</strong></td>
+            <td><span style="color:#27ae60; font-weight:600;">Available</span></td>
+            <td>
+              <a href="edit_weapon.html" class="btn-action btn-edit">Edit</a>
+              <a href="#" class="btn-action btn-delete">Archive</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+</html>

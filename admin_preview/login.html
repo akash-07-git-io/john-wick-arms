@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login | JOHN WICK & CO. ARMS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <span class="gold-text">JOHN WICK &amp; CO.</span> ARMS
+        <span class="logo-sub">CONTINENTAL TACTICAL ARMORY - ADMIN GATEWAY</span>
+      </a>
+      <a href="../index.html" class="btn-gold-sm" style="text-decoration:none;">Public Portal</a>
+    </div>
+  </header>
+
+  <section class="page-section active" style="min-height:80vh; display:flex; align-items:center; justify-content:center;">
+    <div class="auth-card" style="max-width:440px; width:100%; margin:2rem auto;">
+      <h2 class="auth-title">High Table Command</h2>
+      <p class="auth-sub">Restricted Armory Administrative Access Only</p>
+
+      <form onsubmit="return false;">
+        <div class="form-group">
+          <label>Admin Username</label>
+          <input type="text" value="admin" readonly style="border-color:var(--accent-gold);">
+        </div>
+        <div class="form-group">
+          <label>High Table Master Key</label>
+          <input type="password" value="admin123" readonly style="border-color:var(--accent-gold);">
+        </div>
+        <button type="button" class="btn-primary" style="margin-top:1rem;">Authorize Access</button>
+      </form>
+      <div style="margin-top:1.5rem; text-align:center; padding:0.8rem; background:rgba(212,175,55,0.08); border:1px solid var(--gunmetal-border); border-radius:var(--radius); font-size:0.85rem; color:var(--text-muted);">
+        Default Credentials: <strong style="color:var(--accent-gold);">admin</strong> / <strong style="color:var(--accent-gold);">admin123</strong>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

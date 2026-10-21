@@ -93,7 +93,10 @@ function renderCatalogGrid(data, containerId) {
 
 // Weapon Specification & Detail View
 function viewWeaponDetail(weaponId) {
-  const weapon = catalogData.find(w => w.id === weaponId);
+  let weapon = catalogData.find(w => w.id === weaponId);
+  if (!weapon) {
+    weapon = catalogData.find(w => w.id.includes(weaponId) || w.name.toLowerCase().includes(String(weaponId).toLowerCase())) || catalogData[0];
+  }
   if (!weapon) return;
 
   currentlyViewedWeaponId = weapon.id;
@@ -193,16 +196,24 @@ function updateCartUI() {
     : catalogData.filter(item => item.category === activeCategory);
   renderCatalogGrid(filtered, 'full-catalog-grid');
   
-  // Render Cart inside Payment Page
+  // Render Cart inside Payment Page & Dedicated Cart Page
   const cartListContainer = document.getElementById('cart-items-list');
   const totalPriceElem = document.getElementById('cart-total-price');
+  const dedicatedCartList = document.getElementById('dedicated-cart-items-list');
+  const dedicatedTotalPrice = document.getElementById('dedicated-cart-total-price');
   
   let total = 0;
   cart.forEach(item => total += item.price);
 
   if (cart.length === 0) {
-    cartListContainer.innerHTML = `<p style="color:var(--text-muted);">Your requisition cart is empty. Add tactical hardware from the Armory Catalog.</p>`;
-    totalPriceElem.textContent = "$0";
+    if (cartListContainer) {
+      cartListContainer.innerHTML = `<p style="color:var(--text-muted);">Your requisition cart is empty. Add tactical hardware from the Armory Catalog.</p>`;
+    }
+    if (totalPriceElem) totalPriceElem.textContent = "$0";
+    if (dedicatedCartList) {
+      dedicatedCartList.innerHTML = `<p style="color:var(--text-muted); padding:2rem 0; text-align:center;">Your requisition cart is empty. Visit the <a href="javascript:void(0)" onclick="navigateTo('catalog')" style="color:var(--accent-gold); text-decoration:none;">Armory Catalog</a> to add weapons.</p>`;
+    }
+    if (dedicatedTotalPrice) dedicatedTotalPrice.textContent = "$0";
   } else {
     // Group items by id
     const counts = {};
@@ -215,18 +226,26 @@ function updateCartUI() {
       return { ...item, count: counts[id], subtotal: item.price * counts[id] };
     });
 
-    cartListContainer.innerHTML = uniqueItems.map(item => {
+    const itemsHtml = uniqueItems.map(item => {
       return `
-        <div class="cart-item-row">
-          <div>
-            <div style="font-weight:600;">${item.name}</div>
-            <div style="color:var(--accent-gold); font-size:0.85rem;">Qty: ${item.count} &times; ${item.priceDisplay} = $${item.subtotal.toLocaleString()}</div>
+        <div class="cart-item-row" style="display:flex; justify-content:space-between; align-items:center; padding:1rem 0; border-bottom:1px solid var(--gunmetal-border);">
+          <div style="display:flex; align-items:center; gap:1.2rem;">
+            <img src="${item.image}" alt="${item.name}" style="width:70px; height:50px; object-fit:contain; background:#0d0e14; border:1px solid var(--gunmetal-border); border-radius:4px; padding:2px;">
+            <div>
+              <div style="font-weight:600; font-size:1rem;">${item.name}</div>
+              <div style="color:var(--text-muted); font-size:0.8rem;">${item.category} &bull; ${item.caliber || ''}</div>
+              <div style="color:var(--accent-gold); font-size:0.9rem; margin-top:2px;">Qty: ${item.count} &times; ${item.priceDisplay} = <strong>$${item.subtotal.toLocaleString()}</strong></div>
+            </div>
           </div>
-          <button class="btn-danger" style="width:auto; padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="removeFromCart('${item.id}')">Remove</button>
+          <button class="btn-danger" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="removeFromCart('${item.id}')">Remove</button>
         </div>
       `;
     }).join('');
-    totalPriceElem.textContent = `$${total.toLocaleString()}`;
+
+    if (cartListContainer) cartListContainer.innerHTML = itemsHtml;
+    if (totalPriceElem) totalPriceElem.textContent = `$${total.toLocaleString()}`;
+    if (dedicatedCartList) dedicatedCartList.innerHTML = itemsHtml;
+    if (dedicatedTotalPrice) dedicatedTotalPrice.textContent = `$${total.toLocaleString()}`;
   }
 
   // Update Continental Gold Coins requirement (1 coin = $1,000)
@@ -235,6 +254,11 @@ function updateCartUI() {
   if (coinsElem) {
     coinsElem.textContent = total === 0 ? "0 Coins" : `${coinsNeeded} Gold Coin${coinsNeeded > 1 ? 's' : ''} ($${total.toLocaleString()})`;
   }
+}
+
+function clearCart() {
+  cart = [];
+  updateCartUI();
 }
 
 // 1-Click Test User Credentials Auto-Fill
@@ -330,3 +354,58 @@ function handleLogout() {
   document.getElementById('nav-profile').style.display = 'none';
   navigateTo('home');
 }
+
+// Deep linking & URL Hash Support for Academic Demo & Direct Navigation
+function handleUrlHash() {
+  const raw = window.location.hash.replace(/^#\/?/, '').replace('page-', '');
+  if (!raw) return;
+
+  const parts = raw.split('?');
+  const pageId = parts[0];
+  const queryParams = new URLSearchParams(parts[1] || '');
+
+  if (pageId === 'weapon-detail') {
+    const weaponId = queryParams.get('id') || 'jw-01';
+    viewWeaponDetail(weaponId);
+  } else if (pageId === 'cart') {
+    if (cart.length === 0) {
+      addToCart('jw-01');
+      addToCart('jw-07');
+      addToCart('jw-11');
+    }
+    navigateTo('cart');
+  } else if (pageId === 'payment') {
+    if (cart.length === 0) {
+      addToCart('jw-01');
+      addToCart('jw-02');
+    }
+    navigateTo('payment');
+  } else if (pageId === 'login') {
+    fillTestUser('wick');
+    navigateTo('login');
+  } else if (pageId === 'profile') {
+    currentUser = {
+      name: 'John Wick',
+      email: 'wick@continental.nyc',
+      tier: 'Level 5 — Baba Yaga Sovereign Diplomat',
+      marker: 'BOM-7741-JW'
+    };
+    updateUserUI();
+    navigateTo('profile');
+  } else if (pageId === 'register') {
+    navigateTo('register');
+  } else if (pageId === 'catalog') {
+    navigateTo('catalog');
+  } else if (pageId === 'success') {
+    navigateTo('success');
+  } else if (pageId === 'home') {
+    navigateTo('home');
+  } else {
+    navigateTo(pageId);
+  }
+}
+
+window.addEventListener('hashchange', handleUrlHash);
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(handleUrlHash, 100);
+});
