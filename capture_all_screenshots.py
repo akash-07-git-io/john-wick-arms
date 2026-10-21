@@ -8,22 +8,22 @@ dest_dir = r"d:\Akash Files\Akash L Clg Documents\Web prg\john-wick-arms\screens
 os.makedirs(dest_dir, exist_ok=True)
 
 targets = [
-    ("screenshot_01_home.png", "http://localhost:8080/index.html#home"),
-    ("screenshot_02_catalog.png", "http://localhost:8080/index.html#catalog"),
-    ("screenshot_03_weapon_detail.png", "http://localhost:8080/index.html#weapon-detail?id=pit_viper"),
-    ("screenshot_04_register.png", "http://localhost:8080/index.html#register"),
-    ("screenshot_05_login.png", "http://localhost:8080/index.html#login"),
-    ("screenshot_06_cart.png", "http://localhost:8080/index.html#cart"),
-    ("screenshot_07_checkout_payment.png", "http://localhost:8080/index.html#payment"),
-    ("screenshot_08_order_success.png", "http://localhost:8080/index.html#success"),
-    ("screenshot_09_my_orders.png", "http://localhost:8080/index.html#profile"),
-    ("screenshot_10_admin_login.png", "http://localhost:8080/admin_preview/login.html"),
-    ("screenshot_11_admin_dashboard.png", "http://localhost:8080/admin_preview/dashboard.html"),
-    ("screenshot_12_admin_weapons.png", "http://localhost:8080/admin_preview/weapons.html"),
-    ("screenshot_13_admin_add_weapon.png", "http://localhost:8080/admin_preview/add_weapon.html"),
-    ("screenshot_14_admin_edit_weapon.png", "http://localhost:8080/admin_preview/edit_weapon.html"),
-    ("screenshot_15_admin_orders.png", "http://localhost:8080/admin_preview/orders.html"),
-    ("screenshot_16_db_schema.png", "http://localhost:8080/admin_preview/db_schema.html"),
+    ("screenshot_01_home.png", "http://localhost:3000/index.html#home"),
+    ("screenshot_02_catalog.png", "http://localhost:3000/index.html#catalog"),
+    ("screenshot_03_weapon_detail.png", "http://localhost:3000/index.html#weapon-detail?id=jw-01"),
+    ("screenshot_04_register.png", "http://localhost:3000/index.html#register"),
+    ("screenshot_05_login.png", "http://localhost:3000/index.html#login"),
+    ("screenshot_06_cart.png", "http://localhost:3000/index.html#cart"),
+    ("screenshot_07_checkout_payment.png", "http://localhost:3000/index.html#payment"),
+    ("screenshot_08_order_success.png", "http://localhost:3000/index.html#success"),
+    ("screenshot_09_my_orders.png", "http://localhost:3000/index.html#profile"),
+    ("screenshot_10_admin_login.png", "http://localhost:3000/admin_preview/login.html"),
+    ("screenshot_11_admin_dashboard.png", "http://localhost:3000/admin_preview/dashboard.html"),
+    ("screenshot_12_admin_weapons.png", "http://localhost:3000/admin_preview/weapons.html"),
+    ("screenshot_13_admin_add_weapon.png", "http://localhost:3000/admin_preview/add_weapon.html"),
+    ("screenshot_14_admin_edit_weapon.png", "http://localhost:3000/admin_preview/edit_weapon.html"),
+    ("screenshot_15_admin_orders.png", "http://localhost:3000/admin_preview/orders.html"),
+    ("screenshot_16_db_schema.png", "http://localhost:3000/admin_preview/db_schema.html"),
 ]
 
 print(f"Starting capture of {len(targets)} screenshots...")
