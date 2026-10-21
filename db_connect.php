@@ -41,6 +41,22 @@ if (!$conn) {
 // Set UTF-8 encoding
 mysqli_set_charset($conn, 'utf8mb4');
 
+// Auto-seed schema and data if tables do not exist yet (e.g. Render/Docker initial boot)
+$check_table = @mysqli_query($conn, "SHOW TABLES LIKE 'weapons'");
+if ($check_table && mysqli_num_rows($check_table) === 0) {
+    $sql_file = __DIR__ . '/database/john_wick_arms.sql';
+    if (file_exists($sql_file)) {
+        $sql = file_get_contents($sql_file);
+        if (mysqli_multi_query($conn, $sql)) {
+            do {
+                if ($result = mysqli_store_result($conn)) {
+                    mysqli_free_result($result);
+                }
+            } while (mysqli_more_results($conn) && mysqli_next_result($conn));
+        }
+    }
+}
+
 // Start session if not already active
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
