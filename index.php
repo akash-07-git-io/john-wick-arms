@@ -1,6 +1,13 @@
 <?php
 $page_title = 'High Table Armory';
 require_once 'db_connect.php';
+
+// If database is not available (e.g. static/cloud demo container), route to full interactive SPA
+if (!$conn) {
+    header("Location: index.html");
+    exit();
+}
+
 require_once 'includes/header.php';
 
 // Fetch featured weapons (latest 4)
