@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JOHN WICK & CO. ARMS | High Table Armory</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand-logo" onclick="navigateTo('home')">JOHN WICK <span>& CO. ARMS</span></div>
+      <nav class="nav-links">
+        <a class="nav-item active" data-page="home" onclick="navigateTo('home')">Home</a>
+        <a class="nav-item" data-page="catalog" onclick="navigateTo('catalog')">Armory Catalog</a>
+        <a class="nav-item" data-page="events" onclick="navigateTo('events')">High Table Events</a>
+        <a class="nav-item" data-page="register" id="nav-register" onclick="navigateTo('register')">Register</a>
+        <a class="nav-item" data-page="login" id="nav-login" onclick="navigateTo('login')">Login</a>
+        <a class="nav-item" data-page="profile" id="nav-profile" onclick="navigateTo('profile')" style="display:none;">Profile</a>
+        <a class="nav-item" data-page="payment" onclick="navigateTo('payment')">Credit Payment (<span id="cart-count">0</span>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app-root">
+
+    <!-- 1. HOME PAGE VIEW -->
+    <section id="page-home" class="page-section active">
+      <div class="hero-banner home-hero">
+        <span class="badge">Continental Sommelier Selection</span>
+        <h1 class="hero-title">EXCLUSIVELY FOR THE HIGH TABLE</h1>
+        <p class="hero-subtitle">Tactical perfection. Crimson steel. Excommunicado protection.</p>
+        <button class="btn-primary" style="max-width: 250px; margin-top: 1.5rem;" onclick="navigateTo('catalog')">Explore Armory Catalog</button>
+      </div>
+
+      <div class="catalog-container">
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Sommelier Featured Arsenal</h2>
+        <div class="product-grid" id="home-featured-grid"></div>
+      </div>
+    </section>
+
+    <!-- 2. ARMORY CATALOG PAGE VIEW -->
+    <section id="page-catalog" class="page-section">
+      <div class="hero-banner catalog-hero">
+        <span class="badge">Tactical Inventory</span>
+        <h1 class="hero-title">ARMORY CATALOG</h1>
+        <p class="hero-subtitle">Match-grade sidearms, tactical shotguns & sniper platforms.</p>
+      </div>
+
+      <div class="catalog-container">
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterCatalog('all')">All Items</button>
+          <button class="filter-btn" onclick="filterCatalog('Sidearms')">Sidearms</button>
+          <button class="filter-btn" onclick="filterCatalog('Shotguns')">Shotguns</button>
+          <button class="filter-btn" onclick="filterCatalog('Submachine Guns')">Submachine Guns</button>
+          <button class="filter-btn" onclick="filterCatalog('Rifles')">Rifles</button>
+        </div>
+
+        <div class="product-grid" id="full-catalog-grid"></div>
+      </div>
+    </section>
+
+    <!-- 3. HIGH TABLE EVENTS PAGE VIEW (6 EVENTS) -->
+    <section id="page-events" class="page-section">
+      <div class="hero-banner events-hero">
+        <span class="badge">Exclusive Allocations</span>
+        <h1 class="hero-title">HIGH TABLE EVENTS</h1>
+        <p class="hero-subtitle">Reserve exclusive Continental briefings, weapon unveilings, and training.</p>
+      </div>
+
+      <div class="catalog-container">
+        <div class="product-grid" id="events-grid"></div>
+      </div>
+    </section>
+
+    <!-- 4. REGISTER PAGE VIEW -->
+    <section id="page-register" class="page-section">
+      <div class="hero-banner register-hero">
+        <span class="badge">Continental Credentialing</span>
+        <h1 class="hero-title">OPERATIVE REGISTRATION</h1>
+      </div>
+
+      <div class="form-container">
+        <h2 class="section-title">New Credentials</h2>
+        <p class="section-subtitle">Create your High Table clearance profile.</p>
+        
+        <form id="register-form" onsubmit="handleRegister(event)" novalidate>
+          <div class="form-group">
+            <label for="reg-name">Full Operative Name *</label>
+            <input type="text" id="reg-name" placeholder="John Wick">
+            <span class="error-msg" id="err-reg-name"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-email">Secure Email Address *</label>
+            <input type="email" id="reg-email" placeholder="wick@continental.com">
+            <span class="error-msg" id="err-reg-email"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-password">Security Password *</label>
+            <input type="password" id="reg-password" placeholder="At least 6 characters">
+            <span class="error-msg" id="err-reg-password"></span>
+          </div>
+
+          <button type="submit" class="btn-primary">Register Account</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 5. LOGIN PAGE VIEW -->
+    <section id="page-login" class="page-section">
+      <div class="hero-banner login-hero">
+        <span class="badge">Clearance Check</span>
+        <h1 class="hero-title">OPERATIVE AUTHENTICATION</h1>
+      </div>
+
+      <div class="form-container">
+        <h2 class="section-title">Operative Login</h2>
+        <p class="section-subtitle">Authenticate your Continental session.</p>
+
+        <form id="login-form" onsubmit="handleLogin(event)" novalidate>
+          <div class="form-group">
+            <label for="login-email">Email Address *</label>
+            <input type="email" id="login-email" placeholder="wick@continental.com">
+            <span class="error-msg" id="err-login-email"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Password *</label>
+            <input type="password" id="login-password" placeholder="••••••••">
+            <span class="error-msg" id="err-login-password"></span>
+          </div>
+
+          <button type="submit" class="btn-primary">Authenticate Operative</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 6. USER PROFILE PAGE VIEW -->
+    <section id="page-profile" class="page-section">
+      <div class="hero-banner profile-hero">
+        <span class="badge">Status: Active</span>
+        <h1 class="hero-title">OPERATIVE DOSSIER</h1>
+      </div>
+
+      <div class="form-container" style="max-width:650px;">
+        <h2 class="section-title">Continental Profile</h2>
+        <p class="section-subtitle">Authenticated Clearance Level & Reserved Events</p>
+
+        <div class="profile-card">
+          <div class="profile-row">
+            <span class="profile-label">Operative Clearance:</span>
+            <span class="profile-val" style="color: var(--success-green);">High Table Approved</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Operative Name:</span>
+            <span class="profile-val" id="profile-display-name">--</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Email Address:</span>
+            <span class="profile-val" id="profile-display-email">--</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Registered Events:</span>
+            <span class="profile-val" id="profile-display-events">None</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Ledger Balance:</span>
+            <span class="profile-val">🪙 250 Gold Coins</span>
+          </div>
+        </div>
+
+        <button class="btn-secondary" onclick="handleLogout()">Logout Operative Session</button>
+      </div>
+    </section>
+
+    <!-- 7. CREDIT CARD PAYMENT & CART PAGE VIEW -->
+    <section id="page-payment" class="page-section">
+      <div class="hero-banner payment-hero">
+        <span class="badge">Encrypted Checkout</span>
+        <h1 class="hero-title">REQUISITION & PAYMENT</h1>
+      </div>
+
+      <div class="payment-layout-container">
+        <!-- Requisition Cart Summary -->
+        <div class="cart-container">
+          <h2 class="section-title" style="text-align: left;">Requisition Cart</h2>
+          <div id="cart-items-list" class="cart-items-list"></div>
+          <div class="cart-summary">
+            <span>Total Ledger Amount:</span>
+            <span id="cart-total-price" class="cart-total-price">$0</span>
+          </div>
+        </div>
+
+        <!-- Payment Form -->
+        <div class="form-container" style="margin: 0; max-width: 100%;">
+          <h2 class="section-title">Credit Card Payment</h2>
+          <p class="section-subtitle">Encrypted transaction for High Table requisitions.</p>
+
+          <form id="payment-form" onsubmit="handlePayment(event)" novalidate>
+            <div class="form-group">
+              <label for="card-name">Cardholder Full Name *</label>
+              <input type="text" id="card-name" placeholder="John Wick">
+              <span class="error-msg" id="err-card-name"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="card-number">Credit Card Number *</label>
+              <input type="text" id="card-number" placeholder="4532 1122 3344 5566" maxlength="19">
+              <span class="error-msg" id="err-card-number"></span>
+            </div>
+
+            <div class="row-2">
+              <div class="form-group">
+                <label for="card-exp">Expiry (MM/YY) *</label>
+                <input type="text" id="card-exp" placeholder="12/28" maxlength="5">
+                <span class="error-msg" id="err-card-exp"></span>
+              </div>
+              <div class="form-group">
+                <label for="card-cvv">CVV *</label>
+                <input type="password" id="card-cvv" placeholder="880" maxlength="4">
+                <span class="error-msg" id="err-card-cvv"></span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Process Credit Card Requisition</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUCCESS CONFIRMATION SECTION -->
+    <section id="page-success" class="page-section">
+      <div class="status-card">
+        <h2 style="color: var(--accent-gold); font-size: 2rem;">Requisition Approved</h2>
+        <p style="margin: 1rem 0; color: var(--text-muted);">Payment authorized. Your tactical hardware allocation has been dished out by the Sommelier.</p>
+        <button class="btn-secondary" onclick="navigateTo('home')">Return to Home</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 JOHN WICK & CO. ARMS. All rights reserved under Continental jurisdiction.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/catalog-data.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

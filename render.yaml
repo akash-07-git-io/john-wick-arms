@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: john-wick-arms
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_HOST
+        value: localhost
+      - key: DB_USER
+        value: root
+      - key: DB_PASS
+        value: ""
+      - key: DB_NAME
+        value: john_wick_arms
